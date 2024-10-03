@@ -1,60 +1,53 @@
-console.log('🕔 Starting...')
-let { spawn } = require('child_process')
-let path = require('path')
-let fs = require('fs')
-let package = require('./package.json')
-const CFonts  = require('cfonts')
-CFonts.say('Rpg\nWhatsApp Bot', {
-  font: 'chrome',
-  align: 'center',
-  gradient: ['red', 'magenta']
-})
-CFonts.say(`'${package.name}' By @${package.author.name || package.author}\n𖡞ђ૯૨ʍ᭄αท вѳτż ver 1.5.0\nRecode By Hermansyah`, {
-  font: 'console',
-  align: 'center',
-  gradient: ['red', 'magenta']
-})
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Terproteksi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        #loginForm {
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
 
-var isRunning = false
-/**
- * Start a js file
- * @param {String} file `path/to/file`
- */
-function start(file) {
-  if (isRunning) return
-  isRunning = true
-  let args = [path.join(__dirname, file), ...process.argv.slice(2)]
-  CFonts.say([process.argv[0], ...args].join(' '), {
-    font: 'console',
-    align: 'center',
-    gradient: ['red', 'magenta']
-  })
-  let p = spawn(process.argv[0], args, {
-    stdio: ['inherit', 'inherit', 'inherit', 'ipc']
-  })
-  p.on('message', data => {
-    console.log('[✅ RECEIVED]', data)
-    switch (data) {
-      case 'reset':
-        p.kill()
-        isRunning = false
-        start.apply(this, arguments)
-        break
-      case 'uptime':
-        p.send(process.uptime())
-        break
+<div id="loginForm">
+    <h2>Masukkan Password</h2>
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkPassword()">Masuk</button>
+    <p id="message"></p>
+</div>
+
+<div id="protectedContent" style="display: none;">
+    <h1>Konten Terproteksi</h1>
+    <p>Selamat datang di konten yang dilindungi!</p>
+</div>
+
+<script>
+    const correctPassword = "passwordku"; // Ganti dengan password yang kamu inginkan
+
+    document.getElementById('loginForm').style.display = 'block';
+
+    function checkPassword() {
+        const inputPassword = document.getElementById('password').value;
+        if (inputPassword === correctPassword) {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('protectedContent').style.display = 'block';
+        } else {
+            document.getElementById('message').innerText = 'Password salah!';
+        }
     }
-  })
-  p.on('exit', code => {
-    isRunning = false
-    console.error('[❗] Exited with code:', code)
-    if (code === 0) return
-    fs.watchFile(args[0], () => {
-      fs.unwatchFile(args[0])
-      start(file)
-    })
-  })
-  // console.log(p)
-}
+</script>
 
-start('main.js')
+</body>
+</html>
