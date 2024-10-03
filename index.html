@@ -11,17 +11,52 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f4f4f4;
+            background-image: url('https://media-upload.net/uploads/X2FTWc6v7aEI.jpg'); /* Gambar latar belakang */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+        }
+        #loginForm, #protectedContent {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8); /* Warna latar belakang setengah transparan */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         #loginForm {
             display: none;
-            text-align: center;
+        }
+        img.profile {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+        }
+        input[type="password"] {
+            padding: 10px;
+            width: 80%;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
 
 <div id="loginForm">
+    <img src="https://media-upload.net/uploads/dX3x61GWH4ED.jpg" alt="Foto Profil" class="profile"> <!-- Gambar profil -->
     <h2>Masukkan Password</h2>
     <input type="password" id="password" placeholder="Password">
     <button onclick="checkPassword()">Masuk</button>
@@ -34,7 +69,7 @@
 </div>
 
 <script>
-    const correctPassword = "passwordku"; // Ganti dengan password yang kamu inginkan
+    const correctPassword = "AdminUnf3768"; // Password baru
 
     document.getElementById('loginForm').style.display = 'block';
 
@@ -45,6 +80,7 @@
             document.getElementById('protectedContent').style.display = 'block';
         } else {
             document.getElementById('message').innerText = 'Password salah!';
+            document.getElementById('password').value = ''; // Bersihkan input setelah gagal
         }
     }
 </script>
