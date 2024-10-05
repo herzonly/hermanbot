@@ -16,7 +16,7 @@ const USER = {
 };
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join('./', 'public', 'login.html'));  // Menggunakan './' untuk merujuk pada direktori saat ini
+    res.sendFile(path.join('public', 'login.html'));  // Menggunakan './' untuk merujuk pada direktori saat ini
 });
 
 app.post('/login', (req, res) => {
