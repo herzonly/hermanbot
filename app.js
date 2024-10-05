@@ -4,8 +4,6 @@ const bodyParser = require('body-parser');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 
-const __dirname = path.resolve();
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -18,7 +16,7 @@ const USER = {
 };
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+    res.sendFile(path.join('./', 'public', 'login.html'));  // Menggunakan './' untuk merujuk pada direktori saat ini
 });
 
 app.post('/login', (req, res) => {
